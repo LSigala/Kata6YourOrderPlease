@@ -1,95 +1,55 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+import 'bootstrap/dist/css/bootstrap.css';
 
-export default function Home() {
+export default function Form1() {
+
+    async function orderSentence(e: any){
+        e.preventDefault();
+    
+        const data = {
+            Sentence: (e.target.sentence.value)
+        }
+
+        let separateSentence = data.Sentence.split(" ")
+        
+        
+        obtainOrder(separateSentence)   
+      }
+
+      async function obtainOrder(separateSentence: any){
+        const separateString2:Array<string> = new Array<string>();
+
+        let counter = ["1", "2", "3", "4", "5", "6", "7", "8" , "9"];
+        if(counter.toString() <= separateSentence.length.toString()) {
+          
+          for(let item of counter){
+            
+            for (let item2 of separateSentence) {
+              const element = item2;
+              let item3 = item2.split("")
+  
+              for(let item4 of item3){
+                  if (item4 == item) {
+                    separateString2.push(element)
+                }
+              }
+            }
+          }
+        }
+        alert(separateString2.join(" "))
+      }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+      <form onSubmit={orderSentence} className="container col-6 text-center mt-4 bg-light">
+        <div className="pb-2">
+            <div className="form-group mt-5 p-3 d-flex">
+                <div className="form-group mb-3  mx-auto">
+                    <label>Enter Sentence</label>
+                    <input type="text" className="form-control" id="sentence" required aria-describedby="emailHelp " />
+                </div>
+            </div>
+            <button type="submit" className="btn btn-primary mt-3 mb-3 mx-auto d-block">Send Data</button>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </form>
   );
 }
